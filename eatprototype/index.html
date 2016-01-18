@@ -1,0 +1,283 @@
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<script src="scripts/d3.min.js"></script>
+		<script src="scripts/conData.js"></script>
+		<script src="scripts/script.js"></script>
+	</head>
+	<body>
+		<h1>PROTOTYPE 1.0</h1>
+		<button id="run">RUN</button>
+		<div id="menu">
+			<div class="variable" id="Ryff_SUM">Ryff Psychological Wellbeing (Sum)</div>
+			<div class="variable" id="ConScale_SUM">Contentment (new scale)</div>
+			<div class="variable" id="DPESRCONTENTMENT">Dispositional Contentment (John & Keltner)</div>
+			<div class="variable" id="SatisWLife_SUM">Satisfaction with Life (Diener)</div>
+			<div class="variable" id="Age">Age</div>
+			<div class="variable" id="RYFF_AUTONOMY">Ryff (Autonomy)</div>
+			<div class="variable" id="RYFF_ENV">Ryff (Env Mastery)</div>
+			<div class="variable" id="RYFF_PERSGROWTH">Ryff (Personal Growth)</div>
+			<div class="variable" id="RYFF_POSREL">Ryff (pos. rel)</div>
+			<div class="variable" id="RYFF_PURP">Ryff (Purpose in Life)</div>
+			<div class="variable" id="RYFF_SELF">RYFF (Self)</div>
+		</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<script>
+
+
+		var dataset = conData;
+
+		var circleR = 10,
+			circleOpacity = 0.05;
+			circleLowOpacity = circleOpacity/4;
+
+		var container = {	"width":600,
+							"height":300,
+							"padding":30
+						}
+
+		var canvas = 	{	"width":container.width-container.padding*2,
+							"height": container.height-container.padding*2,
+							"top":container.padding,
+							"bottom":container.height-container.padding,
+							"left":container.padding,
+							"right":container.width-container.padding,
+							"center":container.padding+container.height-container.padding*2
+						}
+
+
+// d3.max takes in an array. dataset.map maps all of the "x"s into an array.
+// Define circle characteristics
+		var svgContainer = d3.select('body')
+							.append('svg')
+							.attr('class','visualization')
+							.attr('width', container.width)
+							.attr('height', container.height);
+
+		var circles = svgContainer.selectAll("circle")
+						.data(conData)
+						.enter()
+						.append("circle")
+						.attr("cx", container.width/2)
+						.attr("cy", container.height/2)
+						.attr("r",circleR)
+						.attr('fill',"black")
+						.attr('opacity',circleOpacity);
+
+		var eventListeners = circles
+								.on("mouseover", function(d){
+									d3.select(this)
+										.attr('opacity',.9);
+								})
+								.on("mouseout", function(d){
+									d3.select(this)
+										.attr('opacity',circleOpacity);
+								})
+								.on("click", function(d){
+									this.classList.toggle("highlighted")
+								})
+
+
+
+		svgContainer
+			.on("mousedown", function(){
+				if (d3.event.srcElement.tagName != "circle"){
+					d3.selectAll( '.highlighted').classed( "highlighted", false);
+				}
+
+				// var clickCoords = d3.mouse(this);
+
+				// svgContainer.append('rect')
+				// 	.attr({
+				// 		rx:3,
+				// 		ry:3,
+				// 		class:"selection",
+				// 		x:clickCoords[0],
+				// 		y:clickCoords[1],
+				// 		width:3,
+				// 		height:3
+				// 	})
+			})
+			// .on("mousemove", function(){
+			// 	var s = svgContainer.select('rect.selection');
+
+			// 	if (!s.empty()){
+			// 		var clickCoords = d3.mouse(this),
+			// 			d = {
+			// 				x:parseInt(s.attr('x'),10),
+			// 				y:parseInt(s.attr('y'),10),
+			// 				width:parseInt(s.attr('width'),10),
+			// 				height:parseInt(s.attr('height'),10),
+			// 			},
+			// 			move = {
+			// 				x:s[0]-d.x,
+			// 				y:s[1]-d.y
+			// 			};
+
+			// 		if( move.x < 1 || (move.x*2<d.width)) {
+			//             d.x = p[0];
+			//             d.width -= move.x;
+			//         } else {
+			//             d.width = move.x;       
+			//         }
+
+			//         if( move.y < 1 || (move.y*2<d.height)) {
+			//             d.y = p[1];
+			//             d.height -= move.y;
+			//         } else {
+			//             d.height = move.y;       
+			//         }
+			       
+			//         s.attr( d);
+			// 	}
+				
+			// })
+
+
+
+
+
+
+
+
+		// visualize("Ryff_SUM","ConScale_SUM");
+
+
+
+function visualize(x,y){
+
+	var var1 = x,
+		var2 = y;
+
+// finds the max and min of each dataset to feed to our d3.scale.
+
+	if (var1){
+		var minVar1 = 	0,
+		// d3.min(dataset.map(function(d){
+		// 					return d[var1];
+		// 				})),
+			maxVar1 = 	d3.max(dataset.map(function(d){
+							return d[var1];
+						}));
+
+		var xScale = d3.scale.linear()
+					.domain([minVar1,maxVar1])
+					.range([canvas.left,canvas.right]);			
+	};
+
+	if (var2){
+		var minVar2 = 	0,
+		// d3.min(dataset.map(function(d){
+		// 					return d[var2];
+		// 				})),
+			maxVar2 = 	d3.max(dataset.map(function(d){
+							return d[var2];
+						}));
+
+		var yScale = d3.scale.linear()
+					.domain([minVar2,maxVar2])
+					.range([canvas.bottom, canvas.top]);			
+	};	
+
+
+	var xAxis = d3.svg.axis()
+					.scale(xScale)
+					.orient("bottom");
+
+	var yAxis = d3.svg.axis()
+						.scale(yScale)
+						.orient('left');
+
+
+	if (!svgContainer.select(".x.axis").empty()){
+		svgContainer.select(".x.axis")
+			.transition()
+			.duration(500)
+			.call(xAxis)
+	} else {
+		svgContainer.append('g')
+			.attr("class","x axis")
+			.attr("transform","translate(0,"+canvas.bottom+")")
+			.call(xAxis);		
+	};
+
+	if (var2){
+		if (!svgContainer.select(".y.axis").empty()){
+			svgContainer.select(".y.axis")
+			.transition()
+			.duration(500)
+			.call(yAxis)
+		} else {	
+			svgContainer.append('g')
+				.attr("class","y axis")
+				.attr("transform", "translate(" + container.padding + ",0)")
+				.call(yAxis);
+		}
+	} else {
+		if (svgContainer.select(".y.axis")){
+			svgContainer.select(".y.axis").remove();
+		}
+	}
+
+
+
+
+
+
+
+
+
+
+
+	circles.transition().duration(1000)
+		.attr("cx",function(d){
+			if (var1) {
+				return xScale(d[var1]);
+			} else {
+				return canvas.left;
+			}
+		})
+		.attr("cy",function(d){
+			if (var2) {
+				return yScale(d[var2]);
+			} else {
+				return canvas.bottom;
+			}
+		})
+
+
+
+
+}
+
+
+
+// ——————————————————————————————————————
+
+
+
+
+
+		</script>
+
+
+
+	</body>
+
+
+</html>

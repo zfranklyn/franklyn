@@ -1,0 +1,47 @@
+body {
+font-family:"Avenir";
+}
+
+#menu {
+	width:600px;
+	height:200;
+	display:block;
+}
+
+.variable {
+	padding:10px;
+	float:left;
+}
+
+.variable:hover{
+	background-color:#EBFAFF;
+	color:#29A3CC;
+}
+
+.selected{
+	background-color:#EBFAFF;
+	color:#29A3CC;
+}
+
+.special {
+	background-color: #29A3CC;
+	color:white;
+}
+
+.visualization {
+
+}
+
+.axis path {
+	display:none;
+}
+
+circle.highlighted {
+	opacity:.8;
+	fill:red;
+}
+
+rect.selection{
+	fill:cyan;
+	fill-opacity:0.2;
+}
