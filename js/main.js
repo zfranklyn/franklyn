@@ -2,7 +2,7 @@ $( document ).ready(function() {
 	particlesJS("particles-js", {
 	  "particles": {
 	    "number": {
-	      "value": 80,
+	      "value": 30,
 	      "density": {
 	        "enable": true,
 	        "value_area": 800
@@ -41,7 +41,7 @@ $( document ).ready(function() {
 	      "random": true,
 	      "anim": {
 	        "enable": false,
-	        "speed": 40,
+	        "speed": 20,
 	        "size_min": 0.1,
 	        "sync": false
 	      }
