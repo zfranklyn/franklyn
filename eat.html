@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>Miner: Mobile App Concept</title>
+		<title>The Exploratory Data Analysis Tool</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
 		<meta content="Franklyn Zhu is a designer at Yale studying Computer Science and Psychology." name="description">
@@ -116,7 +116,7 @@
 		</div> -->
 
 		<div class="content">
-			<img src="./assets/img/eat/eat-design.png">
+			<img src="./assets/img/eat/eat.gif">
 
 			<div class="project-title">
 				<h1>EXPLORATORY ANALYSIS TOOL</h1>
@@ -124,36 +124,92 @@
 			</div>
 
 			<p>
-				Amazon MTurk is an online platform that allows researchers (Requesters) to request crowdsourced solutions to various tasks (completed by Workers). This side project sought to imagine what a mobile-first re-design of MTurk might look like.
+				Data analysis in social science research can be a cognitively taxing process. Existing industry tools like SPSS, SAS, or R, are not suited for the initial stages of data cleaning, visualization, and diagnostic statistics. Driven by a desire for a better way to analyze data, I coded together a prototype for this novel data analysis tool using D3.JS. This prototype of the Exploratory Data Analysis Tool (EAT) is an imagination of a data analysis tool that truly allows you to "touch and feel" the data.
 
-				This project somehow led me to join the Stanford Crowd Research Collective, a worldwide group of researchers led by Michael Bernstein in Stanford CS, to help build the next generation crowdsourcing marketplace.
+				The EAT is still a work in progress - I am currently implementing the drag and drop function, and am now learning how to hook this up with ReactJS. 
+
+				Check out a working prototype <a href="www.franklyn.xyz/eatprototype">here</a>.
 			</p>
 
-			<h2>THE IMPORTANCE OF MOBILE-FIRST IN CROWDSOURCING</h2>			
+			<h2>THE PROBLEM</h2>			
 			<p>
-				Mobile 
+				Exploratory Data Analysis (EDA) requires high level theoretical and critical thinking. Ideally, an EDA tool should be a malleable, intuitive interface that enables big picture thinking in addition to the ability to further investigate specific relationships.
+
+				Traditional data analysis tools like SPSS (created in 1968), SAS (1976), and R (1980)  are great for conducting statistical tests and confirmatory hypothesis testing, but can become cognitively taxing for exploratory data analyses. There are a number of factors that contribute towards this:
+
+				<br><br>
+
+				<strong>1. Non-Interactive Output</strong>
+				All three tools are based around a model of syntax-output, syntax-output. Syntax is written, run, and output comes out in a long stream in the console window. The output is not interactive, and if one wishes to further explore a relationship, new syntax must be written. For instance, imagine that we have just run correlations between a number of variables, and wish to further explore significant relationships in the form of regressions. In SPSS, we would have to go back to the syntax editor and write completely new code. This becomes tedious after a few iterations.
+
+				Possible solution: make the output interactive. The intuitive action here would be to click on the significant relationship in the output, which would bring you directly to a scatterplot. But existing tools do not seem to be designed around the natural flow of the data analysis process.
+				<br><br>
+				<img src="./assets/img/eat/corr.gif">
+				<br><br>
+				<strong>2. Endless Scroll of Output</strong>
+				SPSS records all operations performed by the user in another window, called "Output". In order to find the results of previously implemented analyses, one would need to either scroll up through existing output, or implement a new, redundant analysis. As more tests are conducted, it becomes difficult to keep track of findings. 
+
+				Possible solution: keep a separate "notebook" where one can save interesting results. This would enable users to only keep track of the important findings, rather than having to scroll through irrelevant output.
+
+				<br>
+				<br>
+				<strong>3. Difficulty in generating visuals/non-interactive</strong>
+				Visuals in SPSS are notoriously annoying to create (easier in R using various plotting packages). However, none of these statistical tools enable great interactive visuals. Being able to click on specific data points, remove outliers, select groups of points, is a very intuitive function that doesn't exist in any existing statistical packages. This functionality is usually reserved for visualization packages (like Spotfire, Tableau), but visualization packages also lack the ability to run statistical analyses required in EDA.
+
+				Possible solution: redesign the flow of creating data visualizations in statistical packages.
+
 			</p>
 
-			<h2>MTURK IS NOT MOBILE FRIENDLY</h2>
-
+			<h2>USER INTERVIEWS</h2>
 			<p>
-				A lack of mobile-first design precludes a Worker's ability to do many types of tasks on MTurk in that free time. According to a survey that I conducted (80 participants, online survey), 69% of participants used MTurk on laptops, only 5% using smartphones. However, 47% reported at times wanting to use MTurk, but being unable to due to lack of laptop. If a mobile version of MTurk existed, 76% of participants said that they would use it, and 41% participants said they would prefer a mobile client over a laptop client. 
+				Thus far, all thoughts for possible improvements were derived from my personal experiences. I conducted a series of user interviews with social science, public health, and neuroscience researchers.
+				<br><br>
+				<strong>User Interview 1: Psychology Graduate Student</strong>
+				This individual was a graduate student studying social psychology at Yale. She had an extensive statistics background, and was highly proficient with R. Many of her datasets were of Qualtrics survey format, and came from Amazon MTurk. Key points from this interview were:
+				<ul>
+					<li>She was a very proficient user of R, and although was aware of the issues I had encountered, did not consider them to be that inconvenient</li>
+					<li>She worked around the problem of non-interactive output by becoming very familiar with syntax</li>
+					<li>She organized her syntax very carefully to be able to rerun specific analyses in R very easily. RStudio was helpful in this regard.</li>
+				</ul>
+				<strong>User Interview 2: Neuroscience Professor</strong>
+					This professor worked mainly with statistical models and neuroscience data. These datasets, by nature, required a very different set of statistical tools. This user had a very different set of problems, and though could see the potential usefulness of such a visualization tool, did not think that it was flexible enough to be able to conduct the analyses his lab did. It was apparent that this user was tackling very different statistical questions, and the issues I had encountered may not apply in his domain.
+				
+				<br><br>
 
-				The user interface is certainly not optimized for mobile usage:
+				<strong>User Interview 3: Public Health Quantitative Analyst</strong>
 
-				<br>
-				<br>
-				<img src="./assets/img/miner/miner-mturk.png">
-				<br>
-				<br>
+				This was a researcher who specialized in analysis of big public health data, often involving hundreds, if not thousands of variables. She was mainly a user of SAS. She encountered many of the same issues as I did. A few key points summarized from this interview were that:
 
-				Indeed, 88% of Workers agreed that the UI could be improved. Many tasks on MTurk are extremely tedious and boring; this is exacerbated by the lack of satisfying visual and interactive feedback. MTurk workers reported being bored 45% of the time, and start clicking randomly due to boredom 15% of the time.
+				<ul>
+					<li>It is often difficult to keep track of all the different types of analyses that have been run, the results of looking at different relationships</li>
+					<li>She mentioned that researchers sometimes create a giant document that keeps track of variables, presenting their descriptive statistics (both visually and numerically) and important correlations. Upon discussing my proposed solutions with her, she thought that a tool that could enable easy access to these basic relationships and information could be extremely useful when presenting the data to other people</li>
+				</ul>			
 			</p>
 
-			<h2>REIMAGINING MTURK FOR MOBILE</h2>
+			<h2>PROTOTYPING A SOLUTION</h2>
 			<p>
-				A mobile interface 
+				With these potential improvements and user interviews in mind, I spent a weekend hacking together a prototype. I wanted a tool that was different from the current data-frame centric statistical packages, which presented data in an intuitively visual form. Visual representation of data reveal patterns that otherwise might have remained invisible in aggregate statistics. 
+
+				The prototype was called the Exploratory Analysis Tool (EAT), and can be found <a href="www.franklyn.xyz/eatprototype">here</a>.
+
+				In the prototype, I used a generic survey dataset containing peoples' scores on measures of psychological wellbeing. The tool enables instant scatterplot visualization of bivariate correlations. Switching between variables is accompanied with a smooth transition, which enables users to see how individuals vary across different measures. For instance, if a person scores particularly high in one measure, will they also score very high in a related, different measure?
+
+				I brought this prototype to a couple of new users. Feedback was extremely promising, with many users remarking that this would be a great tool to use in conjunction with R (the EAT to look at general correlations, and R to use for more complex analyses). Additional functionality that I hope to add include:
+
+				<ul>
+					<li>Actual numerical information to accompany visual scatterplots;</li>
+					<li>Ability to draw regression lines;</li>
+					<li>Ability to drag/drop CSV data files;</li>
+					<li>Ability to exclude specific data points from analyses through clicking;</li>
+					<li>Ability to keep track of the analyses that have been run; and</li>
+					<li>Basic cleaning and data wrangling abilities (reverse coding, creating composite variables).</li>
+				</ul>
+
+				I could imagine the tool eventually looking something like this:
+
 			</p>
+			<img src="./assets/img/eat/eat-design.png">
+
 
 			
 		</div>
