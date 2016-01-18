@@ -84,6 +84,12 @@ img {
     text-align: center;
 }
 
+.intro_container span{
+	font-family: "Lato", sans-serif;
+	font-weight: 300;
+	margin:10px;
+}
+
 #intro_title{
 	font-size: 2em;
 	font-weight:bold;
@@ -95,7 +101,14 @@ img {
 .intro {
 	text-align: center;
 	line-height: 1.8;
-	
+}
+
+.links{
+	opacity:0.5;
+}
+
+.links:hover{
+	opacity:0.9;
 }
 
 .portfolio {
