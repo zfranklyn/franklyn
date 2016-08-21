@@ -1,0 +1,11 @@
+.content{
+	background-color:black;
+}
+
+.text{
+	height:100%;
+	background-color:white;
+	font-family:Georgia;
+	text-align:center;
+	font-size:3em;
+}

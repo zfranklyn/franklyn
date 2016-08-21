@@ -27,93 +27,89 @@
 			</div>
 
 			<p>
-				Data analysis in social science research can be a cognitively taxing process. Existing industry tools like SPSS, SAS, or R, are not suited for the initial stages of data cleaning, visualization, and diagnostic statistics. Driven by a desire for a better way to analyze data, I coded together a prototype for this novel data analysis tool using D3.JS. This prototype of the Exploratory Data Analysis Tool (EAT) is an imagination of a data analysis tool that truly allows you to "touch and feel" the data.
+				Data analysis in psychology research can be a cognitively taxing process. I investigated the need for a data analysis product that allows quick perusal of correlations and visualizations. I developed a prototype for this novel data analysis tool using D3.JS.
 
-				The EAT is still a work in progress - I am currently implementing the drag and drop function, and am now learning how to hook this up with ReactJS. 
+				<br><br>
 
 				Check out a working prototype <a href="www.franklyn.xyz/eatprototype">here</a>.
 			</p>
 
 			<h2>THE PROBLEM</h2>			
 			<p>
-				Exploratory Data Analysis (EDA) requires high level theoretical and critical thinking. Ideally, an EDA tool should be a malleable, intuitive interface that enables big picture thinking in addition to the ability to further investigate specific relationships.
+				Imagine you've just sent out a questionnaire to 1000 students, and want to see if there's a correlation between student life habits and psychological wellbeing. You've included a ton of questions about age, sleep, drinking, drugs, procrastination, GPA, and scales of wellbeing.
 
-				Traditional data analysis tools like SPSS (created in 1968), SAS (1976), and R (1980)  are great for conducting statistical tests and confirmatory hypothesis testing, but can become cognitively taxing for exploratory data analyses. There are a number of factors that contribute towards this:
+				Typically, you would start by running diagnostic and descriptive statistics, followed by a correlations matrix, scatterplots and regressions. This quick overview is very important, as it allows you to get an immediate feel for the data and pick out any glaring inconsistencies. But your traditional data analysis tools like SPSS (created in 1968) are a bit too "heavy" for this light correlational analysis. Here's why:
 
 				<br><br>
 
 				<strong>1. Non-Interactive Output</strong>
-				All three tools are based around a model of syntax-output, syntax-output. Syntax is written, run, and output comes out in a long stream in the console window. The output is not interactive, and if one wishes to further explore a relationship, new syntax must be written. For instance, imagine that we have just run correlations between a number of variables, and wish to further explore significant relationships in the form of regressions. In SPSS, we would have to go back to the syntax editor and write completely new code. This becomes tedious after a few iterations.
+				All three tools are based around a model of syntax-output, syntax-output. Syntax is written, run, and output comes out in a long stream in the console window. The output is not interactive, and if you want to further explore a relationship, new syntax must be written. For instance, imagine that we have just run correlations between a number of variables, and wish to further explore significant relationships in the form of regressions. In SPSS, we would have to go back to the syntax editor and write completely new code (or, heaven forbid, point and click through their nested menus). This becomes tedious after a few iterations.
 
-				Possible solution: make the output interactive. The intuitive action here would be to click on the significant relationship in the output, which would bring you directly to a scatterplot. But existing tools do not seem to be designed around the natural flow of the data analysis process.
 				<br><br>
 				<img class="full-image" src="./assets/img/eat/corr.gif">
 				<br><br>
+
 				<strong>2. Endless Scroll of Output</strong>
 				SPSS records all operations performed by the user in another window, called "Output". In order to find the results of previously implemented analyses, one would need to either scroll up through existing output, or implement a new, redundant analysis. As more tests are conducted, it becomes difficult to keep track of findings. 
-
-				Possible solution: keep a separate "notebook" where one can save interesting results. This would enable users to only keep track of the important findings, rather than having to scroll through irrelevant output.
 
 				<br>
 				<br>
 				<strong>3. Difficulty in generating visuals/non-interactive</strong>
-				Visuals in SPSS are notoriously annoying to create (easier in R using various plotting packages). However, none of these statistical tools enable great interactive visuals. Being able to click on specific data points, remove outliers, select groups of points, is a very intuitive function that doesn't exist in any existing statistical packages. This functionality is usually reserved for visualization packages (like Spotfire, Tableau), but visualization packages also lack the ability to run statistical analyses required in EDA.
+				Visuals in SPSS are notoriously annoying to create. However, none of these statistical tools enable great interactive visuals. Being able to click on specific data points, remove outliers, select groups of points, is a very intuitive function that doesn't exist in any existing statistical packages. This functionality is usually reserved for visualization packages (like Spotfire, Tableau), but visualization packages also do not focus on statistical analysis.
 
-				Possible solution: redesign the flow of creating data visualizations in statistical packages.
-
-			</p>
-
-			<h2>USER INTERVIEWS</h2>
-			<p>
-				Thus far, all thoughts for possible improvements were derived from my personal experiences. I conducted a series of user interviews with social science, public health, and neuroscience researchers.
-				<br><br>
-				<strong>User Interview 1: Psychology Graduate Student</strong>
-				This individual was a graduate student studying social psychology at Yale. She had an extensive statistics background, and was highly proficient with R. Many of her datasets were of Qualtrics survey format, and came from Amazon MTurk. Key points from this interview were:
-				<ul>
-					<li>She was a very proficient user of R, and although was aware of the issues I had encountered, did not consider them to be that inconvenient</li>
-					<li>She worked around the problem of non-interactive output by becoming very familiar with syntax</li>
-					<li>She organized her syntax very carefully to be able to rerun specific analyses in R very easily. RStudio was helpful in this regard.</li>
-				</ul>
-				<strong>User Interview 2: Neuroscience Professor</strong>
-					This professor worked mainly with statistical models and neuroscience data. These datasets, by nature, required a very different set of statistical tools. This user had a very different set of problems, and though could see the potential usefulness of such a visualization tool, did not think that it was flexible enough to be able to conduct the analyses his lab did. It was apparent that this user was tackling very different statistical questions, and the issues I had encountered may not apply in his domain.
-				
-				<br><br>
-
-				<strong>User Interview 3: Public Health Quantitative Analyst</strong>
-
-				This was a researcher who specialized in analysis of big public health data, often involving hundreds, if not thousands of variables. She was mainly a user of SAS. She encountered many of the same issues as I did. A few key points summarized from this interview were that:
-
-				<ul>
-					<li>It is often difficult to keep track of all the different types of analyses that have been run, the results of looking at different relationships</li>
-					<li>She mentioned that researchers sometimes create a giant document that keeps track of variables, presenting their descriptive statistics (both visually and numerically) and important correlations. Upon discussing my proposed solutions with her, she thought that a tool that could enable easy access to these basic relationships and information could be extremely useful when presenting the data to other people</li>
-				</ul>			
 			</p>
 
 			<h2>PROTOTYPING A SOLUTION</h2>
 			<p>
-				With these potential improvements and user interviews in mind, I spent a weekend hacking together a prototype. I wanted a tool that was different from the current data-frame centric statistical packages, which presented data in an intuitively visual form. Visual representation of data reveal patterns that otherwise might have remained invisible in aggregate statistics. 
+				With these potential problems in mind, I spent a weekend hacking together a prototype. I wanted a tool that was different from the current data-frame centric statistical packages, which presented data in an intuitively visual form. Visual representation of data reveal patterns that otherwise might have remained invisible in aggregate statistics. 
 
 				The prototype was called the Exploratory Analysis Tool (EAT), and can be found <a href="www.franklyn.xyz/eatprototype">here</a>.
 
 				In the prototype, I used a generic survey dataset containing peoples' scores on measures of psychological wellbeing. The tool enables instant scatterplot visualization of bivariate correlations. Switching between variables is accompanied with a smooth transition, which enables users to see how individuals vary across different measures. For instance, if a person scores particularly high in one measure, will they also score very high in a related, different measure?
 
-				I brought this prototype to a couple of new users. Feedback was extremely promising, with many users remarking that this would be a great tool to use in conjunction with R (the EAT to look at general correlations, and R to use for more complex analyses). Additional functionality that I hope to add include:
+				<br><br>
 
-				<ul>
-					<li>Actual numerical information to accompany visual scatterplots;</li>
-					<li>Ability to draw regression lines;</li>
-					<li>Ability to drag/drop CSV data files;</li>
-					<li>Ability to exclude specific data points from analyses through clicking;</li>
-					<li>Ability to keep track of the analyses that have been run; and</li>
-					<li>Basic cleaning and data wrangling abilities (reverse coding, creating composite variables).</li>
-				</ul>
-
-				I could imagine the tool eventually looking something like this:
+				The product could potentially look like this:
 
 			</p>
 			<img class="full-image" src="./assets/img/eat/eat-design.png">
 			
 		</div>
+
+			<h2>INTERVIEWS</h2>
+			<p>
+				I brought this prototype to a couple of new users. Feedback was mixed, with some users remarking that this would be a great tool to use in conjunction with R (the EAT to look at general correlations, and R to use for more complex analyses), and others remarking that the idea has limited uses.
+				
+				<br><br>
+
+				<strong>Interview 1: Psychology Graduate Student</strong>
+				This individual was a graduate student studying statistics and psychology at Yale. She had an extensive statistics background, and was highly proficient with R. Many of her datasets were of Qualtrics survey format, and came from Amazon MTurk. Key points from this interview were:
+				<ul>
+					<li>She was a very proficient user of R, and although was aware of the issues I had encountered, did not consider them to be that inconvenient</li>
+					<li>She worked around the problem of non-interactive output by becoming very familiar with syntax</li>
+					<li>She organized her syntax very carefully to be able to rerun specific analyses in R very easily. RStudio was helpful in this regard.</li>
+				</ul>
+				
+				It seemed that the problems that I had identified were not really problems for high level users of statistical tools.
+
+				<strong>Interview 2: Neuroscience Professor</strong>
+					This professor worked mainly with statistical models and neuroscience data. These datasets, by nature, required a very different set of statistical tools. This user had a very different set of problems, and though could see the potential usefulness of such a visualization tool, did not think that it was flexible enough to be able to conduct the analyses his lab did. It was apparent that this user was tackling very different statistical questions, and the issues I had encountered may not apply in his domain.
+
+					<br><br>
+
+					However he mentioned that the ability to manipulate interactie visual analyses could be very useful for presentations.
+				
+				<br><br>
+
+				<strong>Interview 3: Social Psychology Graduate Student</strong>
+
+				This was a graduate student in psychology who was doing similar work to me, and mostly analyzing survey data. He also acknolwedged the inconvenience of doing correlations with visuals in SPSS, and was very excited by the prototype.
+	
+			</p>
+
+			I summarized from these qualitative interviews that such a product may be very useful for people with limited data analysis experience, and also to get a quick sense of a data set.
+
+
 
 		<footer>
 			<div>
@@ -152,12 +148,3 @@
 	</script>
 
 </html>
-
-
-
-
-
-
-
-
-
