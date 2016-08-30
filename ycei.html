@@ -1,0 +1,117 @@
+<html>
+	<head>
+		<title>YCEI: SMS Data Collection System</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+		<meta content="Franklyn Zhu is a designer at Yale studying Computer Science and Psychology." name="description">
+		<meta content="Franklyn Zhu" name="author">
+		<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="./css/style.css">
+		<link rel="stylesheet" href="css/grid.css" type="text/css">
+		<script type="text/javascript" src="smooth-scroll.js"></script>
+		<link rel="stylesheet" type="text/css" href="./css/normalize.css">
+	</head>
+
+	<body>
+		<a href="index.html#intro">
+			<img class="button" src="./assets/icons/left.svg"></img>	
+		</a>
+
+		<div class="content">
+			<img class="full-image" src="./assets/img/ycei/ycei-cover.png">
+
+			<div class="project-title">
+				<h1>SMS Based Data Collection</h1>
+				<h2>YALE CENTER FOR EMOTIONAL INTELLIGENCE</h2>
+			</div>
+
+			<p>
+				The Yale Center for Emotional Intelligence was looking for a way to collect wellbeing data from a school on a weekly basis. I developed a text-message based survey system that tracked individual completion, sent text message reminders, and sent scheduled personalized URLs. Stack: Twilio.js, Node.js, Express, MongoDB.
+
+				<br>
+
+				Check out the Github repo <a class="highlight" href="https://github.com/zfranklyn/corbitt" target="_blank">here</a>!
+			</p>
+
+			
+			<h2>THE PROBLEM</h2>
+			<p>
+				Typically, education programs are evaluated (anonymously) through massive surveys distributed via email. This approach has two main problems:
+				<ul>
+					<li><strong>Low Response Rates</strong>: teachers do not wish to complete surveys, and administrators cannot individually remind people to take anonymized surveys. This results in incomplete and unrepresentative data.</li>
+					<li><strong>Inability to Sample Everyday Experience</strong>: if users are asked to complete one long survey in one sitting, their data may not be representative of their experiences over time.</li>
+				</ul>
+
+				In response to these two issues, I developed an SMS based survey distribution system that sent automated reminders to teachers, enabling personalized distribution and anonymous reminders.
+
+				<br><br>
+				The alternative system was to use Qualtrics SMS surveys, but that would have costed the center over $1500; the final cost of the Twilio system was less than $100.
+
+
+			</p>
+
+			<h2>HOW IT WORKS</h2>			
+			<p>
+				Teachers are asked to text “REGISTER youremail@example.com” to a phone number. During the week, they are texted customized URLs to a mobile responsive survey. If they do not complete the survey in 24 hours, they are sent reminders. Administrators are able to check on completion progress, and send out anonymous reminders to users who have yet to complete the survey.
+
+				<br><br>
+
+				All user interactions are via text message commands.
+			</p>			
+
+
+			<h2>RESULTS</h2>
+
+			<p>
+				The project was distributed to 71 users, and has currently been receiving 100% response rates from teachers. In Fall of 2016, we’re going to be launching a more complex version for Yale students to track wellbeing.
+
+			</p>
+
+		</div>
+
+		<footer>
+			<div>
+				<div>FRANKLYN ZHU | 朱宇翔</div>
+
+				<div>
+					<a class="social" href="https://www.linkedin.com/in/franklyn-zhu-1b1ba323" target="_blank">
+						<img src="./assets/icons/linkedin.svg"></img>
+					</a>
+
+                    <a class="social" href="https://www.facebook.com/zfranklyn" target="_blank">
+                    	<img src="./assets/icons/fb.svg"></img>
+					</a>
+
+					<a class="social" href="mailto:franklyn.zhu@yale.edu">
+						<img src="./assets/icons/email.svg"></img>
+                    </a>
+
+                </div>
+			</div>
+		</footer>
+		
+		
+
+	</body>
+	<script src="js/main.js"></script>
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-72536783-1', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+
+</html>
+
+
+
+
+
+
+
+
+
