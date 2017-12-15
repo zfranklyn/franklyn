@@ -1,5 +1,5 @@
 #! /bin/bash
 echo "Syncing with bucket"
-aws s3 sync . s3://franklyn.xyz --exclude ".git"
+aws s3 sync . s3://franklyn.xyz --exclude ".git*"
 echo "Sync Complete"
 
